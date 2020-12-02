@@ -1,2 +1,2 @@
 {:paths ["src"]
- :deps {wing/core {:mvn/version "0.1.4"}}}
+ :deps {org.clojure/math.combinatorics {:mvn/version "0.1.6"}}}
