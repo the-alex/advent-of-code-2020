@@ -20,19 +20,22 @@
    :prod (reduce * pair)})
 
 (defn p1 []
-  (let [nums (->> "data/input-p01-1.txt"
-                 slurp
-                 split-lines
-                 (map read-string))
+  (let [nums (parse-input "data/input-p01-1.txt")
         pair-records (map coll->rec (all-pairs nums))
         record-with-sum-2020 (first (filter #(= 2020 (:sum %)) pair-records))]
     record-with-sum-2020))
 
+
+(defn parse-input [fn]
+  (->> fn
+    slurp
+    split-lines
+    (map read-string)))
+
+
+;; TODO Thread everywhere
 (defn p2 []
-  (let [nums (->> "data/input-p01-1.txt"
-                 slurp
-                 split-lines
-                 (map read-string))
+  (let [nums (parse-input "data/input-p01-1.txt")
         triple-records (map coll->rec (all-triples nums))
         record-with-sum-2020 (first (filter #(= 2020 (:sum %)) triple-records))]
     record-with-sum-2020))
@@ -44,7 +47,6 @@
   (p2)
 
   (def test-nums [1721 979 366 299 675 1456])
-  (all-pairs-comb test-nums)
   (combinations [0 1 2 3 4 5] 3)
 
 
