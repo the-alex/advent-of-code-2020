@@ -119,5 +119,6 @@
 
   ;; (let [hill (parse-input test-input)
 
+  ()
 
   (tree-at-loc? [1 4] (parse-input test-input-2)))
