@@ -36,13 +36,14 @@
 
 ;; A passport is valid if it contains all the required keywords. Howver, if
 ;; missing only `cid`, then we'll count it as just fine.
+
+
 (defn p1-is-valid? [passport]
   (let [required-keys #{"hgt" "pid" "byr" "eyr" "iyr" "ecl" "cid" "hcl"}
         present-keys (keys passport)
         missing-keys (difference required-keys present-keys)]
     ;; if there are no missing keys OR the only missing key is CID
     (or (empty? missing-keys) (= missing-keys #{"cid"}))))
-
 
 (defn p1 [input-filepath]
   (->> input-filepath
@@ -51,7 +52,6 @@
        lines->passports
        (filter p1-is-valid?)
        count))
-
 
 (def validators
   {;; byr (Birth Year) - four digits; at least 1920 and at most 2002.
@@ -115,29 +115,27 @@
 
 (comment
 
-  (let [valid-passports (slurp "data/input-p04-valid-passports.txt")]
-
-    (p1 "data/input-p04-1.txt")
+  (p1 "data/input-p04-1.txt")
     ;; => 222
-    (p2 "data/input-p04-1.txt")
-    ;; => 153
+  (p2 "data/input-p04-1.txt")
+    ;; => 153 -- correct answer is 140, so where is the bug? 0.o
 
-    (p2 "data/input-p04-invalid-passports.txt")
+  (p2 "data/input-p04-invalid-passports.txt")
     ;; => 0
-    (p2 "data/input-p04-valid-passports.txt")
+  (p2 "data/input-p04-valid-passports.txt")
     ;; => 4
 
-    (->> valid-passports
-         str/split-lines
-         lines->passports
-         (filter p2-is-valid?)
-         count)
+  (->> valid-passports
+       str/split-lines
+       lines->passports
+       (filter p2-is-valid?)
+       count)
 
-    (let [line "ecl:gry pid:860033327 eyr:2020 hcl:#fffffd byr:1937 iyr:2017 cid:147 hgt:183cm"
-          passport (line->passport line)]
-      (let [present-keys (set (keys passport))] present-keys))
+  (let [line "ecl:gry pid:860033327 eyr:2020 hcl:#fffffd byr:1937 iyr:2017 cid:147 hgt:183cm"
+        passport (line->passport line)]
+    (let [present-keys (set (keys passport))] present-keys))
 
-    (let [lines (str/split-lines (slurp "data/input-p04-1.txt"))]
-      (lines->passports lines))
+  (let [lines (str/split-lines (slurp "data/input-p04-1.txt"))]
+    (lines->passports lines))
 
-    (next-passport-string (take 5 (str/split-lines test-input)))))
+  (next-passport-string (take 5 (str/split-lines test-input))))
