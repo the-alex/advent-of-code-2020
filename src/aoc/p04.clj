@@ -76,7 +76,7 @@
                            :else false))))
 
    ;; hcl (Hair Color) - a # followed by exactly six characters 0-9 or a-f.
-   "hcl" (fn [value] (->> value (re-find #"^#[a-z0-9]{6}$") nil? not))
+   "hcl" (fn [value] (->> value (re-find #"^#[a-f0-9]{6}$") nil? not))
 
    ;; ecl (Eye Color) - exactly one of: amb blu brn gry grn hzl oth.
    "ecl" (fn [value] (let [enums #{"amb" "blu" "brn" "gry" "grn" "hzl" "oth"}]
