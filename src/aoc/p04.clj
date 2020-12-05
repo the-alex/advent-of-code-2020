@@ -67,7 +67,7 @@
    ;; If cm, the number must be at least 150 and at most 193.
    ;; If in, the number must be at least 59 and at most 76.
    "hgt" (fn [value] (when-let
-                      [matched-components (->> value (re-matches #"(\d+)([a-z]+)"))]
+                      [matched-components (->> value (re-matches #"(\d+)((cm|in)+)"))]
                        (let [[_ magnitude unit] matched-components
                              magnitude        (read-string magnitude)]
                          (cond
